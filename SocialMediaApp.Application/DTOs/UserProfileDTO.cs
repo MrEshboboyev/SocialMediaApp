@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,8 @@ namespace SocialMediaApp.Application.DTOs
 
         // Foreign Key
         public string UserId { get; set; }            // Foreign key to User
+
+        // Add this for handling image uploads
+        public IFormFile ProfilePicture { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using SocialMediaApp.Application.Common.Interfaces;
 using SocialMediaApp.Application.Common.Models;
 using SocialMediaApp.Application.Common.Utility;
 using SocialMediaApp.Application.DTOs;
@@ -14,12 +15,14 @@ namespace SocialMediaApp.Infrastructure.Implementations
 {
     public class AuthService(UserManager<AppUser> userManager,
         SignInManager<AppUser> signInManager,
-        IConfiguration config) : IAuthService
+        IConfiguration config,
+        IUnitOfWork unitOfWork) : IAuthService
     {
         // inject Identity Managers
         private readonly UserManager<AppUser> _userManager = userManager;
         private readonly SignInManager<AppUser> _signInManager = signInManager;
         private readonly IConfiguration _config = config;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private const int _expirationTokenHours = 12;
 
         public async Task<ResponseDTO<string>> GenerateJwtToken(AppUser user, IEnumerable<string> roles)
@@ -112,6 +115,19 @@ namespace SocialMediaApp.Infrastructure.Implementations
 
                 // assign role
                 await _userManager.AddToRoleAsync(user, SD.Role_User);
+
+                // create user profile for this user
+                UserProfile userProfile = new()
+                {
+                    DateOfBirth = registerModel.DateOfBirth,
+                    ProfilePictureUrl = registerModel.ProfilePictureUrl,
+                    Website = registerModel.Website,
+                    UserId = user.Id
+                };
+
+                // create new profile and add database
+                await _unitOfWork.UserProfile.AddAsync(userProfile);
+                await _unitOfWork.SaveAsync();
 
                 return new ResponseDTO<string>(null, "Registration successful!");
             }

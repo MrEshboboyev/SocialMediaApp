@@ -34,13 +34,19 @@ namespace SocialMediaApp.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Error with entered values");
                 return View(model);
+            }
 
             RegisterModel registerModel = new()
             {
                 Email = model.Email,
-                Password = model.Password
+                Password = model.Password,
+                DateOfBirth = model.DateOfBirth.ToUniversalTime(),
+                ProfilePictureUrl = model.ProfilePictureUrl,
+                Website = model.Website
             };
 
             var result = await _authService.RegisterAsync(registerModel);

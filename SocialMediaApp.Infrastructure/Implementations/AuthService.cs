@@ -111,7 +111,7 @@ namespace SocialMediaApp.Infrastructure.Implementations
                     return new ResponseDTO<string>($"Error : {result.Errors.FirstOrDefault()!.Description}");
 
                 // assign role
-                await _userManager.AddToRoleAsync(user, registerModel.RoleName);
+                await _userManager.AddToRoleAsync(user, SD.Role_User);
 
                 return new ResponseDTO<string>(null, "Registration successful!");
             }

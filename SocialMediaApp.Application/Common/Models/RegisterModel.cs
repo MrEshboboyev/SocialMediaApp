@@ -1,12 +1,18 @@
-﻿namespace SocialMediaApp.Application.Common.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SocialMediaApp.Application.Common.Models
 {
     public class RegisterModel
     {
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
-        public string FullName { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
-        public string RoleName { get; set; }
-        public int? CompanyId { get; set; }
-        public int? PMId { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare(nameof(Password), ErrorMessage = "Password and confirm password must be match.")]
+        public string ConfirmPassword { get; set; }
     }
 }

@@ -40,8 +40,7 @@ namespace SocialMediaApp.UI.Controllers
             RegisterModel registerModel = new()
             {
                 Email = model.Email,
-                FullName = model.FullName,
-                Password = model.Password,
+                Password = model.Password
             };
 
             var result = await _authService.RegisterAsync(registerModel);

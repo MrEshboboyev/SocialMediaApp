@@ -1,0 +1,52 @@
+﻿@model PostDTO
+
+@{
+    ViewBag.Title = "Create a New Post";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Create a New Post</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">New Post</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="Content" class="form-label">Post Content</label>
+                            <textarea class="form-control" id="Content" name="Content" rows="6" placeholder="What's on your mind?" required></textarea>
+                            <div class="invalid-feedback">
+                                Please enter some content for your post.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">Create Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Add client-side validation for better UX -->
+<script>
+    (function() {
+        'use strict'
+
+        var forms = document.querySelectorAll('.needs-validation')
+
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>

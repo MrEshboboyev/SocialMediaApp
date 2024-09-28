@@ -1,0 +1,64 @@
+﻿@model IEnumerable<PostDTO>
+
+@{
+    ViewBag.Title = "Posts";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Recent Posts</h2>
+
+    <div class="row">
+        @if (Model.Any())
+        {
+            foreach (var post in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between">
+                            <span><strong>@post.OwnerName</strong></span>
+                            <span class="small">@post.CreatedAt.ToString("MMMM dd, yyyy hh:mm tt")</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">@post.Content</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <a href="@Url.Action("Details", "Post", new { id = post.Id })" class="btn btn-outline-primary btn-sm">
+                                View Details
+                            </a>
+                            <a href="@Url.Action("Like", "Post", new { id = post.Id })" class="btn btn-outline-success btn-sm ml-2">
+                                Like <i class="bi bi-hand-thumbs-up"></i>
+                            </a>
+                            <a href="@Url.Action("Comment", "Post", new { id = post.Id })" class="btn btn-outline-secondary btn-sm ml-2">
+                                Comment <i class="bi bi-chat-dots"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center">
+                <p class="text-muted">No posts available at the moment.</p>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Optional: Add pagination controls if needed -->
+<div class="d-flex justify-content-center mt-4">
+    <!-- Example Pagination Placeholder -->
+    <nav>
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Previous</a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>

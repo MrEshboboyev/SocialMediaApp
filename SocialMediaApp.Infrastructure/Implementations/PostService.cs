@@ -49,6 +49,24 @@ namespace SocialMediaApp.Infrastructure.Implementations
             }
         }
 
+        public async Task<ResponseDTO<PostDTO>> GetPostAsync(int postId)
+        {
+            try
+            {
+                var post = await _unitOfWork.Post.GetAsync(
+                    filter: p => p.Id.Equals(postId),
+                    includeProperties: "User");
+
+                var mappedPost = _mapper.Map<PostDTO>(post);
+
+                return new ResponseDTO<PostDTO>(mappedPost);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDTO<PostDTO>(ex.Message);
+            }
+        }
+
 
 
         public async Task<ResponseDTO<bool>> CreatePostAsync(PostDTO postDTO)
@@ -69,17 +87,17 @@ namespace SocialMediaApp.Infrastructure.Implementations
             }
         }
 
-        public async Task<ResponseDTO<bool>> UpdatePostAsync(PostDTO postDTO)
+        public async Task<ResponseDTO<bool>> UpdatePostAsync(PostUpdateDTO postUpdateDTO)
         {
             try
             {
                 var postFromDb = await _unitOfWork.Post.GetAsync(
-                    p => p.UserId.Equals(postDTO.UserId) && 
-                    p.Id.Equals(postDTO.Id)
+                    p => p.UserId.Equals(postUpdateDTO.UserId) && 
+                    p.Id.Equals(postUpdateDTO.Id)
                     ) ?? throw new Exception("Post not found!");
 
                 // mapped fields
-                _mapper.Map(postDTO, postFromDb);
+                _mapper.Map(postUpdateDTO, postFromDb);
 
                 await _unitOfWork.Post.UpdateAsync(postFromDb);
                 await _unitOfWork.SaveAsync();

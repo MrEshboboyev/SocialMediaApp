@@ -1,0 +1,60 @@
+﻿@model PostDTO
+
+@{
+    ViewBag.Title = "Update Post";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Update Your Post</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-white">
+                    <h5 class="mb-0">Edit Post</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Update" method="post" class="needs-validation" novalidate>
+                        <input type="hidden" asp-for="Id" />
+
+                        <!-- Post Content -->
+                        <div class="mb-3">
+                            <label for="Content" class="form-label">Post Content</label>
+                            <textarea class="form-control" id="Content" name="Content" rows="6" placeholder="Edit your post here..." required>@Model.Content</textarea>
+                            <div class="invalid-feedback">
+                                Content is required. Please enter the post content.
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning btn-lg">
+                                <i class="bi bi-check-circle"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Client-side validation with Bootstrap -->
+<script>
+    (function() {
+        'use strict'
+
+        var forms = document.querySelectorAll('.needs-validation')
+
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>

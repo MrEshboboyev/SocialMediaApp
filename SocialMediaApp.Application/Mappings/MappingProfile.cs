@@ -22,6 +22,8 @@ namespace SocialMediaApp.Application.Mappings
             // Post -> PostDTO
             CreateMap<PostDTO, Post>().ReverseMap()
                 .ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.User.Email));
+
+            CreateMap<PostUpdateDTO, Post>();
             #endregion
         }
     }

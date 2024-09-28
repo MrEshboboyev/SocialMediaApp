@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PostDTO>
+
+@{
+    ViewBag.Title = "My Posts";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">My Posts</h2>
+
+    <div class="row">
+        @if (Model.Any())
+        {
+            foreach (var post in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                            <span><strong>@post.OwnerName</strong></span>
+                            <span class="small">@post.CreatedAt.ToString("MMMM dd, yyyy hh:mm tt")</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">@post.Content</p>
+                        </div>
+                        <div class="card-footer text-muted d-flex justify-content-between">
+                            <a asp-action="Update" asp-route-postId="@post.Id" class="btn btn-outline-warning btn-sm">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <form asp-action="Delete" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                <input type="hidden" name="postId" value="@post.Id" />
+                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center">
+                <p class="text-muted">You haven't created any posts yet.</p>
+            </div>
+        }
+    </div>
+</div>

@@ -6,8 +6,9 @@ namespace SocialMediaApp.Application.Services.Interfaces
     {
         Task<ResponseDTO<IEnumerable<PostDTO>>> GetAllPostsAsync();
         Task<ResponseDTO<IEnumerable<PostDTO>>> GetUserPostsAsync(string userId);
+        Task<ResponseDTO<PostDTO>> GetPostAsync(int postId);
         Task<ResponseDTO<bool>> CreatePostAsync(PostDTO postDTO);
-        Task<ResponseDTO<bool>> UpdatePostAsync(PostDTO postDTO);
+        Task<ResponseDTO<bool>> UpdatePostAsync(PostUpdateDTO postUpdateDTO);
         Task<ResponseDTO<bool>> DeletePostAsync(PostDTO postDTO);
     }
 }

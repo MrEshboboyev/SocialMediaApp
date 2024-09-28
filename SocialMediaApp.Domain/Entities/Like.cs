@@ -6,7 +6,7 @@
         public DateTime CreatedAt { get; set; }    // Date when the like was made
 
         // Foreign Keys
-        public int UserId { get; set; }            // Foreign key to User
+        public string UserId { get; set; }            // Foreign key to User
         public int PostId { get; set; }            // Foreign key to Post
 
         // Navigation Properties

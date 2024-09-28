@@ -4,7 +4,8 @@ using SocialMediaApp.Domain.Entities;
 
 namespace SocialMediaApp.Infrastructure.Data
 {
-    public class AppDbContext : IdentityDbContext<AppUser>
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : 
+        IdentityDbContext<AppUser>(options)
     {
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Post> Posts { get; set; }
@@ -13,6 +14,8 @@ namespace SocialMediaApp.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             // One-to-One: User <-> UserProfile
             modelBuilder.Entity<AppUser>()
                 .HasOne(u => u.Profile)

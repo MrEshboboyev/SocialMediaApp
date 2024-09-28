@@ -7,7 +7,7 @@
         public DateTime CreatedAt { get; set; }    // Date when post was created
 
         // Foreign Key
-        public int UserId { get; set; }            // Foreign key to User
+        public string UserId { get; set; }            // Foreign key to User
         public AppUser User { get; set; }             // Navigation property to User
 
         // Navigation Properties

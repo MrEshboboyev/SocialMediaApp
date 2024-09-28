@@ -13,7 +13,7 @@ namespace SocialMediaApp.Domain.Entities
         public DateTime CreatedAt { get; set; }    // Date when comment was created
 
         // Foreign Keys
-        public int UserId { get; set; }            // Foreign key to User
+        public string UserId { get; set; }            // Foreign key to User
         public int PostId { get; set; }            // Foreign key to Post
 
         // Navigation Properties

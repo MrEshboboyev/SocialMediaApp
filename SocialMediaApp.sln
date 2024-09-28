@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaApp.Domain", "So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaApp.Infrastructure", "SocialMediaApp.Infrastructure\SocialMediaApp.Infrastructure.csproj", "{1A294F59-7E36-4F5C-9726-7E054EC8F56B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaApp.Application", "SocialMediaApp.Application\SocialMediaApp.Application.csproj", "{7AADE401-AD46-455E-932D-D24AF96BF31A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaApp.UI", "SocialMediaApp.UI\SocialMediaApp.UI.csproj", "{AEF0053B-3493-46E3-A581-A361672F7A45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{1A294F59-7E36-4F5C-9726-7E054EC8F56B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A294F59-7E36-4F5C-9726-7E054EC8F56B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A294F59-7E36-4F5C-9726-7E054EC8F56B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AADE401-AD46-455E-932D-D24AF96BF31A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AADE401-AD46-455E-932D-D24AF96BF31A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AADE401-AD46-455E-932D-D24AF96BF31A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AADE401-AD46-455E-932D-D24AF96BF31A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEF0053B-3493-46E3-A581-A361672F7A45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEF0053B-3493-46E3-A581-A361672F7A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEF0053B-3493-46E3-A581-A361672F7A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEF0053B-3493-46E3-A581-A361672F7A45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

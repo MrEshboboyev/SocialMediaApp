@@ -18,6 +18,7 @@ namespace SocialMediaApp.Infrastructure.Configurations
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<ICommentService, CommentService>();
 
             return services;
         }

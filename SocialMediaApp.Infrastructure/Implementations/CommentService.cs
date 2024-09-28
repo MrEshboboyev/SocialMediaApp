@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using SocialMediaApp.Application.Common.Interfaces;
 using SocialMediaApp.Application.DTOs;
 using SocialMediaApp.Application.Services.Interfaces;
@@ -6,11 +7,13 @@ using SocialMediaApp.Domain.Entities;
 
 namespace SocialMediaApp.Infrastructure.Implementations
 {
-    public class CommentService(IUnitOfWork unitOfWork, IMapper mapper) :
+    public class CommentService(IUnitOfWork unitOfWork, IMapper mapper,
+        UserManager<AppUser> userManager) :
         ICommentService
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IMapper _mapper = mapper;
+        private readonly UserManager<AppUser> _userManager = userManager;
 
 
         public async Task<ResponseDTO<IEnumerable<CommentDTO>>> GetPostCommentsAsync(int postId)
@@ -58,6 +61,11 @@ namespace SocialMediaApp.Infrastructure.Implementations
             {
                 var commentForDb = _mapper.Map<Comment>(commentDTO);
                 commentForDb.CreatedAt = DateTime.Now;
+
+                var user = await _userManager.FindByIdAsync(commentDTO.UserId)
+                    ?? throw new Exception("User not found!");
+
+                commentForDb.User = user;
 
                 await _unitOfWork.Comment.AddAsync(commentForDb);
                 await _unitOfWork.SaveAsync();

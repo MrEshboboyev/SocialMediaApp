@@ -1,0 +1,32 @@
+﻿@model PostDetailsVM
+
+<div class="container mt-5">
+    <!-- Post Details -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-info text-white">
+            <h4>@Model.Post.OwnerName</h4>
+            <small class="text-muted">@Model.Post.CreatedAt.ToString("MMMM dd, yyyy hh:mm tt")</small>
+        </div>
+        <div class="card-body">
+            <p>@Model.Post.Content</p>
+        </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">
+            <h5>Comments</h5>
+        </div>
+        <div class="card-body">
+            <!-- Display existing comments (you can include a comments partial here) -->
+            <div id="comments-section">
+                @Html.Partial("_CommentsPartial", Model.Comments)
+            </div>
+        </div>
+    </div>
+
+    <!-- Add a Comment Section (Include the _CreateCommentPartial here) -->
+    <div class="mt-4">
+        @Html.Partial("_CreateCommentPartial", new CommentDTO { PostId = Model.Post.Id })
+    </div>
+</div>

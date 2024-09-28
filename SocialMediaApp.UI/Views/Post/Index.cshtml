@@ -22,7 +22,7 @@
                             <p class="card-text">@post.Content</p>
                         </div>
                         <div class="card-footer text-muted">
-                            <a href="@Url.Action("Details", "Post", new { id = post.Id })" class="btn btn-outline-primary btn-sm">
+                            <a asp-action="Details" asp-route-postId="@post.Id" class="btn btn-outline-primary btn-sm">
                                 View Details
                             </a>
                             <a href="@Url.Action("Like", "Post", new { id = post.Id })" class="btn btn-outline-success btn-sm ml-2">

@@ -2,14 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using SocialMediaApp.Application.DTOs;
 using SocialMediaApp.Application.Services.Interfaces;
+using SocialMediaApp.UI.ViewModels;
 using System.Security.Claims;
 
 namespace SocialMediaApp.UI.Controllers
 {
     [Authorize]
-    public class PostController(IPostService postService) : Controller
+    public class PostController(IPostService postService,
+        ICommentService commentService) : Controller
     {
         private readonly IPostService _postService = postService;
+        private readonly ICommentService _commentService = commentService;
 
         #region Private Methods
         private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier)
@@ -98,6 +101,22 @@ namespace SocialMediaApp.UI.Controllers
 
             TempData["error"] = result.Message;
             return RedirectToAction(nameof(UserIndex));
+        }
+
+        // Details with comments
+        [HttpGet]
+        public async Task<IActionResult> Details(int postId)
+        {
+            var post = await _postService.GetPostAsync(postId);
+            var postComments = await _commentService.GetPostCommentsAsync(postId);
+
+            PostDetailsVM model = new()
+            {
+                Comments = postComments.Data,
+                Post = post.Data
+            };
+
+            return View(model);
         }
     }
 }

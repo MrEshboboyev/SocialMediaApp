@@ -1,0 +1,65 @@
+﻿@model UserProfileVM
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Profile Picture Section -->
+        <div class="col-md-4 text-center">
+            <div class="card">
+                <div class="card-body">
+                    <img src="@Model.ProfilePictureUrl" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
+                    <h5 class="card-title">@Model.UserName</h5>
+                    <p class="card-text text-muted">@Model.Bio</p>
+                    <a href="@Url.Action("EditProfile", "Account")" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Details Section -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Profile Details</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Email:</strong> @Model.Email</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Date of Birth:</strong> @Model.DateOfBirth?.ToString("MMMM dd, yyyy")</p>
+                        </div>
+                        <div class="col-md-12">
+                            <p><strong>Website:</strong> <a href="@Model.Website" target="_blank">@Model.Website</a></p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h4 class="card-title">Recent Activity</h4>
+                    <!-- Example of Recent Posts (if available) -->
+                    @if (Model.RecentPosts is not null)
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (var post in Model.RecentPosts)
+                            {
+                                <li class="list-group-item">
+                                    <h5>@post.Title</h5>
+                                    <p class="text-muted">@post.CreatedAt.ToString("MMMM dd, yyyy")</p>
+                                    <p>@post.Content</p>
+                                    <a href="@Url.Action("PostDetails", "Post", new { id = post.Id })" class="btn btn-sm btn-secondary">View Post</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No recent activity.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

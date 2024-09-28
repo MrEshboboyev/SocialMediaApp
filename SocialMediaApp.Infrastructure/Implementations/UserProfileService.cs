@@ -16,7 +16,7 @@ namespace SocialMediaApp.Infrastructure.Implementations
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<ResponseDTO<UserProfileDTO>> GetProfile(string userId)
+        public async Task<ResponseDTO<UserProfileDTO>> GetProfileAsync(string userId)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace SocialMediaApp.Infrastructure.Implementations
             }
         }
 
-        public async Task<ResponseDTO<bool>> UpdateProfile(UserProfileDTO userProfileDTO)
+        public async Task<ResponseDTO<bool>> UpdateProfileAsync(UserProfileDTO userProfileDTO)
         {
             try
             {

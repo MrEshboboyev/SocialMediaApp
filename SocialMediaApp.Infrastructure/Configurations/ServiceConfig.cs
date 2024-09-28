@@ -16,6 +16,7 @@ namespace SocialMediaApp.Infrastructure.Configurations
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
 
             return services;
         }

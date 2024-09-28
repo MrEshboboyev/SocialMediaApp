@@ -3,6 +3,7 @@ using SocialMediaApp.UI.Services.IServices;
 using SocialMediaApp.UI.Services;
 using SocialMediaApp.Infrastructure.Configurations;
 using SocialMediaApp.Infrastructure.Services;
+using SocialMediaApp.Application.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,9 @@ builder.Services.AddIdentityConfiguration();
 // configure lifetime for services
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
+
+// configure automapper
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // adding authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

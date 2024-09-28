@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SocialMediaApp.Domain.Entities;
 
-namespace SocialMediaApp.Application.Data
+namespace SocialMediaApp.Infrastructure.Data
 {
     public class AppDbContext : IdentityDbContext<AppUser>
     {

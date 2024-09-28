@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35323.107
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaApp.Domain", "SocialMediaApp.Domain\SocialMediaApp.Domain.csproj", "{586B56FA-D2DA-4A4D-89AB-45A0A12A619A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaApp.Application", "SocialMediaApp.Application\SocialMediaApp.Application.csproj", "{B6AE1B74-7E2D-45D2-A58C-E0876595C26F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaApp.Infrastructure", "SocialMediaApp.Infrastructure\SocialMediaApp.Infrastructure.csproj", "{1A294F59-7E36-4F5C-9726-7E054EC8F56B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{586B56FA-D2DA-4A4D-89AB-45A0A12A619A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{586B56FA-D2DA-4A4D-89AB-45A0A12A619A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{586B56FA-D2DA-4A4D-89AB-45A0A12A619A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B6AE1B74-7E2D-45D2-A58C-E0876595C26F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6AE1B74-7E2D-45D2-A58C-E0876595C26F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6AE1B74-7E2D-45D2-A58C-E0876595C26F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6AE1B74-7E2D-45D2-A58C-E0876595C26F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A294F59-7E36-4F5C-9726-7E054EC8F56B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A294F59-7E36-4F5C-9726-7E054EC8F56B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A294F59-7E36-4F5C-9726-7E054EC8F56B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A294F59-7E36-4F5C-9726-7E054EC8F56B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

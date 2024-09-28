@@ -44,7 +44,7 @@ namespace SocialMediaApp.UI.Controllers
             {
                 Email = model.Email,
                 Password = model.Password,
-                DateOfBirth = model.DateOfBirth.ToUniversalTime(),
+                DateOfBirth = model.DateOfBirth,
                 ProfilePictureUrl = model.ProfilePictureUrl,
                 Website = model.Website
             };

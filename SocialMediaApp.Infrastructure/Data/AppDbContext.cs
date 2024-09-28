@@ -51,6 +51,49 @@ namespace SocialMediaApp.Infrastructure.Data
                 .HasMany(u => u.Likes)
                 .WithOne(l => l.User)
                 .HasForeignKey(l => l.UserId);
+
+            modelBuilder.Entity<UserProfile>(entity =>
+            {
+                entity.Property(p => p.DateOfBirth)
+                    .HasColumnType("date")  // Or "date" if you prefer
+                    .IsRequired(false);         // Make it optional (nullable)
+
+                // Example for adding a default timestamp if you had a CreatedAt property
+                entity.Property(p => p.DateOfBirth)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
+            
+            modelBuilder.Entity<Comment>(entity =>
+            {
+                entity.Property(c => c.CreatedAt)
+                    .HasColumnType("timestamp"); // Or "date" if you prefer
+
+                // Example for adding a default timestamp if you had a CreatedAt property
+                entity.Property(c => c.CreatedAt)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
+
+
+            modelBuilder.Entity<Like>(entity =>
+            {
+                entity.Property(l => l.CreatedAt)
+                    .HasColumnType("timestamp"); // Or "date" if you prefer
+
+                // Example for adding a default timestamp if you had a CreatedAt property
+                entity.Property(l => l.CreatedAt)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
+
+
+            modelBuilder.Entity<Post>(entity =>
+            {
+                entity.Property(p => p.CreatedAt)
+                    .HasColumnType("timestamp"); // Or "date" if you prefer
+
+                // Example for adding a default timestamp if you had a CreatedAt property
+                entity.Property(p => p.CreatedAt)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
         }
     }
 }

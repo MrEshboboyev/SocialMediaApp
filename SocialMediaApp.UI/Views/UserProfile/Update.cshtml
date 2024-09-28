@@ -1,0 +1,57 @@
+﻿@model UserProfileDTO
+
+@{
+    ViewData["Title"] = "Update Profile";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Update Your Profile</h2>
+
+    <form asp-action="Update" method="post" enctype="multipart/form-data">
+        <input asp-for="Id" hidden/>
+        <input asp-for="UserId" hidden/>
+        <div class="row">
+            <!-- Profile Picture Section -->
+            <div class="col-md-4 text-center mb-4">
+                <img src="@Model.ProfilePictureUrl" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 200px;">
+                <div class="mb-3">
+                    <label class="form-label">Change Profile Picture</label>
+                    <input type="file" class="form-control" name="ProfilePicture" accept="image/*">
+                </div>
+            </div>
+
+            <!-- Profile Information Section -->
+            <div class="col-md-8">
+                <div class="row">
+                    <!-- Bio Field -->
+                    <div class="col-md-12 mb-3">
+                        <label for="Bio" class="form-label">Bio</label>
+                        <textarea class="form-control" id="Bio" name="Bio" rows="4">@Model.Bio</textarea>
+                    </div>
+
+                    <!-- Website Field -->
+                    <div class="col-md-12 mb-3">
+                        <label for="Website" class="form-label">Website</label>
+                        <input type="url" class="form-control" id="Website" name="Website" value="@Model.Website" placeholder="https://yourwebsite.com">
+                    </div>
+
+                    <!-- Date of Birth Field -->
+                    <div class="col-md-6 mb-3">
+                        <label for="DateOfBirth" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="DateOfBirth" name="DateOfBirth" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Save Button -->
+        <div class="row mt-4">
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-success btn-lg">Save Changes</button>
+                <a href="/Profile/Index" class="btn btn-secondary btn-lg ms-3">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

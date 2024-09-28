@@ -13,7 +13,7 @@
                     <img src="@Model.ProfilePictureUrl" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
                     <h5 class="card-title">@Model.UserName</h5>
                     <p class="card-text text-muted">@Model.Bio</p>
-                    <a href="@Url.Action("EditProfile", "Account")" class="btn btn-primary">Edit Profile</a>
+                    <a asp-action="Update" class="btn btn-primary">Update Profile</a>
                 </div>
             </div>
         </div>

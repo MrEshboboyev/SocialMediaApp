@@ -25,6 +25,16 @@ namespace SocialMediaApp.Application.Mappings
 
             CreateMap<PostUpdateDTO, Post>();
             #endregion
+
+            #region Comment
+            // Comment -> CommentDTO
+            CreateMap<Comment, CommentDTO>()
+                .ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.User.Email))
+                .ReverseMap();
+
+            // CommentUpdateDTO -> Comment
+            CreateMap<CommentUpdateDTO, Comment>();
+            #endregion
         }
     }
 }

@@ -91,5 +91,10 @@ namespace SocialMediaApp.Infrastructure.Repositories
         {
             dbSet.Remove(entity);
         }
+
+        public async Task UpdateAsync(T entity)
+        {
+            dbSet.Update(entity);
+        }
     }
 }

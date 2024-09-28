@@ -13,5 +13,6 @@ namespace SocialMediaApp.Application.Common.Interfaces
         Task AddAsync(T entity);
         Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
         Task RemoveAsync(T entity);
+        Task UpdateAsync(T entity);
     }
 }

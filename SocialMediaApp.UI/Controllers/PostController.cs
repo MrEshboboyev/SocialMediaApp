@@ -21,13 +21,26 @@ namespace SocialMediaApp.UI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var allPosts = await _postService.GetAllPostsAsync();
-            return View(allPosts.Data);
+            var posts = await _postService.GetAllPostsAsync();  // Fetch posts
+
+            // Set IsLikedByCurrentUser for each post
+            foreach (var post in posts.Data)
+            {
+                post.IsLikedByCurrentUser = post.Likes.Any(like => like.UserId == GetUserId());
+            }
+
+            return View(posts.Data);
         }
 
         public async Task<IActionResult> UserIndex()
         {
             var userPosts = await _postService.GetUserPostsAsync(GetUserId());
+            // Set IsLikedByCurrentUser for each post
+            foreach (var post in userPosts.Data)
+            {
+                post.IsLikedByCurrentUser = post.Likes.Any(like => like.UserId == GetUserId());
+            }
+
             return View(userPosts.Data);
         }
 

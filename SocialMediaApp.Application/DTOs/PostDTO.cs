@@ -17,5 +17,8 @@ namespace SocialMediaApp.Application.DTOs
         public string? OwnerName { get; set; }
 
         public List<LikeDTO> Likes { get; set; }
+
+        // New property to track if the current user has liked this post
+        public bool IsLikedByCurrentUser { get; set; }
     }
 }

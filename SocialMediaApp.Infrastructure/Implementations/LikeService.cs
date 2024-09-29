@@ -36,8 +36,7 @@ namespace SocialMediaApp.Infrastructure.Implementations
             {
                 // get this like
                 var likeFromDb = await _unitOfWork.Like.GetAsync(
-                    l => l.Id.Equals(likeDTO.Id) &&
-                    l.PostId.Equals(likeDTO.PostId) &&
+                    l => l.PostId.Equals(likeDTO.PostId) &&
                     l.UserId.Equals(likeDTO.UserId)
                     ) ?? throw new Exception("Like not found!");
 
@@ -85,6 +84,71 @@ namespace SocialMediaApp.Infrastructure.Implementations
             catch (Exception ex)
             {
                 return new ResponseDTO<int>(ex.Message);
+            }
+        }
+
+        public async Task<ResponseDTO<ToggleLikeResultDTO>> ToggleLikeAsync(int postId, string userId)
+        {
+            try
+            {
+                // Step 1: Check if the user has already liked the post
+                var hasLikedResponse = await HasUserLikedPostAsync(new LikeDTO
+                {
+                    PostId = postId,
+                    UserId = userId
+                });
+
+                if (!hasLikedResponse.Success)
+                    throw new Exception("Error checking like status.");
+
+                bool isLiked = hasLikedResponse.Data;
+
+                // Step 2: Like or Unlike the post based on the current status
+                if (isLiked)
+                {
+                    // Unlike the post
+                    var unlikeResponse = await UnlikePostAsync(new LikeDTO
+                    {
+                        PostId = postId,
+                        UserId = userId
+                    });
+
+                    if (!unlikeResponse.Success)
+                        throw new Exception("Error unliking post.");
+
+                    isLiked = false;
+                }
+                else
+                {
+                    // Like the post
+                    var likeResponse = await LikePostAsync(new LikeDTO
+                    {
+                        PostId = postId,
+                        UserId = userId
+                    });
+
+                    if (!likeResponse.Success)
+                        throw new Exception("Error liking post.");
+
+                    isLiked = true;
+                }
+
+                // Step 3: Get the updated like count
+                var likeCountResponse = await GetPostLikeCountAsync(postId);
+
+                if (!likeCountResponse.Success)
+                    throw new Exception("Error getting like count.");
+
+                // Return the updated like status and like count
+                return new ResponseDTO<ToggleLikeResultDTO>(new ToggleLikeResultDTO
+                {
+                    IsLiked = isLiked,
+                    LikeCount = likeCountResponse.Data
+                });
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDTO<ToggleLikeResultDTO>(ex.Message);
             }
         }
     }

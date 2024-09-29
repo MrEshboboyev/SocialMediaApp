@@ -1,9 +1,5 @@
 ﻿@model IEnumerable<PostDTO>
 
-@{
-    ViewBag.Title = "My Posts";
-}
-
 <div class="container mt-5">
     <h2 class="text-center mb-4">My Posts</h2>
 
@@ -14,20 +10,14 @@
             {
                 <div class="col-md-6 mb-4">
                     <div class="card shadow-sm">
-                        <!-- Card Header: Owner Name and Created At -->
                         <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
                             <span><strong>@post.OwnerName</strong></span>
                             <span class="small">@post.CreatedAt.ToString("MMMM dd, yyyy hh:mm tt")</span>
                         </div>
-
-                        <!-- Card Body: Post Content -->
                         <div class="card-body">
                             <p class="card-text">@post.Content</p>
                         </div>
-
-                        <!-- Card Footer: Edit, Delete, and Like -->
                         <div class="card-footer text-muted d-flex justify-content-between align-items-center">
-                            <!-- Edit and Delete Buttons -->
                             <div>
                                 <a asp-action="Update" asp-route-postId="@post.Id" class="btn btn-outline-warning btn-sm">
                                     <i class="bi bi-pencil-square"></i> Edit
@@ -40,12 +30,13 @@
                                 </form>
                             </div>
 
-                            <!-- Like Button and Like Count Badge -->
+                            <!-- Like Button with AJAX Support -->
                             <div>
-                                <a asp-action="Like" asp-route-postId="@post.Id" class="btn btn-outline-success btn-sm">
+                                <button class="btn btn-sm like-btn @((post.IsLikedByCurrentUser ? "btn-success" : "btn-outline-success"))"
+                                        data-post-id="@post.Id" onclick="toggleLike(this, @post.Id)">
                                     <i class="bi bi-hand-thumbs-up"></i> Like
-                                </a>
-                                <span class="badge bg-success ms-2" style="font-size: 1rem;">
+                                </button>
+                                <span class="badge bg-success ms-2 like-count" style="font-size: 1rem;">
                                     <i class="bi bi-hand-thumbs-up-fill"></i> @post.Likes.Count
                                 </span>
                             </div>
@@ -62,3 +53,30 @@
         }
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        // AJAX function to toggle the like status
+          function toggleLike(button, postId) {
+            $.ajax({
+                url: '@Url.Action("ToggleLike", "Like")',
+                type: 'POST',
+                data: { postId: postId },
+                success: function(response) {
+                    if (response.success) {
+                        // Toggle the button class based on the new like state
+                        $(button).toggleClass('btn-outline-success btn-success');
+
+                        // Update the like count
+                        $(button).siblings('.like-count').text(response.likeCount);
+                    } else {
+                        alert('An error occurred while liking the post.');
+                    }
+                },
+                error: function() {
+                    alert('An error occurred while liking the post.');
+                }
+            });
+        }
+    </script>
+}

@@ -38,12 +38,23 @@
 
                             <div>
                                 <!-- Like Button with Like Count -->
-                                <a asp-action="Like" asp-route-postId="@post.Id" class="btn btn-outline-success btn-sm">
-                                    <i class="bi bi-hand-thumbs-up"></i> Like
-                                </a>
+                                @if (post.IsLikedByCurrentUser)
+                                {
+                                    <!-- User already liked the post -->
+                                    <button class="btn btn-success btn-sm like-btn" onclick="toggleLike(this, @post.Id)">
+                                        <i class="bi bi-hand-thumbs-up-fill"></i> Liked
+                                    </button>
+                                }
+                                else
+                                {
+                                    <!-- User has not liked the post -->
+                                    <button class="btn btn-outline-success btn-sm like-btn" onclick="toggleLike(this, @post.Id)">
+                                        <i class="bi bi-hand-thumbs-up"></i> Like
+                                    </button>
+                                }
 
                                 <!-- Like Counter Badge -->
-                                <span class="badge bg-success ms-2" style="font-size: 1rem;">
+                                <span class="badge bg-success ms-2 like-count" style="font-size: 1rem;">
                                     <i class="bi bi-hand-thumbs-up-fill"></i> @post.Likes.Count
                                 </span>
                             </div>
@@ -77,3 +88,36 @@
         </ul>
     </nav>
 </div>
+
+@section Scripts {
+    <script>
+        // AJAX function to toggle the like status
+        function toggleLike(button, postId) {
+            $.ajax({
+                url: '@Url.Action("ToggleLike", "Like")',
+                type: 'POST',
+                data: { postId: postId },
+                success: function(response) {
+                    if (response.success) {
+                        // Toggle the button class and text based on the new like state
+                        if (response.isLiked) {
+                            $(button).removeClass('btn-outline-success').addClass('btn-success');
+                            $(button).html('<i class="bi bi-hand-thumbs-up-fill"></i> Liked');
+                        } else {
+                            $(button).removeClass('btn-success').addClass('btn-outline-success');
+                            $(button).html('<i class="bi bi-hand-thumbs-up"></i> Like');
+                        }
+
+                        // Update the like count
+                        $(button).siblings('.like-count').text(response.likeCount);
+                    } else {
+                        alert('An error occurred while liking the post.');
+                    }
+                },
+                error: function() {
+                    alert('An error occurred while liking the post.');
+                }
+            });
+        }
+    </script>
+}

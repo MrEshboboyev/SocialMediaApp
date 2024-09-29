@@ -8,5 +8,6 @@ namespace SocialMediaApp.Application.Services.Interfaces
         Task<ResponseDTO<bool>> UnlikePostAsync(LikeDTO likeDTO);
         Task<ResponseDTO<bool>> HasUserLikedPostAsync(LikeDTO likeDTO);
         Task<ResponseDTO<int>> GetPostLikeCountAsync(int postId);
+        Task<ResponseDTO<ToggleLikeResultDTO>> ToggleLikeAsync(int postId, string userId);
     }
 }

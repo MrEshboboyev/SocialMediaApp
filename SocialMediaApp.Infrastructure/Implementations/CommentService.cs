@@ -39,7 +39,7 @@ namespace SocialMediaApp.Infrastructure.Implementations
         {
             try
             {
-                var comment = await _unitOfWork.Comment.GetAllAsync(
+                var comment = await _unitOfWork.Comment.GetAsync(
                     filter: c => c.Id.Equals(commentId),
                     includeProperties: "User"
                     );

@@ -1,0 +1,25 @@
+﻿@model CommentDTO
+@inject Microsoft.AspNetCore.Identity.UserManager<AppUser> UserManager
+
+<div class="comment mb-3 p-3 bg-light border rounded">
+    <div class="d-flex justify-content-between">
+        <h6>@Model.OwnerName</h6>
+        <small class="text-muted">@Model.CreatedAt.ToString("MMMM dd, yyyy hh:mm tt")</small>
+    </div>
+    <p>@Model.Content</p>
+
+    @if (UserManager.GetUserId(User) == Model.UserId) // Show buttons only if the comment belongs to the logged-in user
+    {
+        <div class="d-flex justify-content-end">
+            <!-- Edit Button -->
+            <button class="btn btn-sm btn-warning me-2" onclick="loadEditForm(@Model.Id)">
+                <i class="bi bi-pencil"></i> Edit
+            </button>
+
+            <!-- Delete Button -->
+            <button class="btn btn-sm btn-danger" onclick="confirmDelete(@Model.Id)">
+                <i class="bi bi-trash"></i> Delete
+            </button>
+        </div>
+    }
+</div>

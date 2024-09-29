@@ -1,0 +1,24 @@
+﻿@model CommentDTO
+
+<div id="editCommentForm-@Model.Id" class="edit-comment-form mt-3 p-3 border rounded bg-light">
+    <h5>Edit Comment</h5>
+    <form asp-controller="Comment" asp-action="Update" method="post" id="editCommentForm">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="PostId" value="@Model.PostId" />
+        <div class="form-group">
+            <textarea class="form-control" name="Content" rows="3" required>@Model.Content</textarea>
+        </div>
+        <div class="d-grid mt-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> Save Changes
+            </button>
+            <button type="button" class="btn btn-secondary mt-2" onclick="cancelEdit(@Model.Id)">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function cancelEdit(commentId) {
+        $('#editCommentForm-' + commentId).hide();
+    }
+</script>

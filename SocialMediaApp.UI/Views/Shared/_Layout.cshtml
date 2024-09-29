@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SocialMediaApp</title>
+    <title>@ViewData["Title"] - Social Media App</title>
 
     <!-- Bootstrap and Custom CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -84,6 +84,7 @@
         <!-- Render the main content of the page -->
         <main role="main" class="pb-3">
             @RenderBody()
+            <partial name="_Notifications"/>
         </main>
     </div>
 
@@ -100,5 +101,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <partial name="_ValidationScriptsPartial"/>
 </body>
 </html>

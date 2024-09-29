@@ -16,10 +16,9 @@ namespace SocialMediaApp.Application.Common.Models
         public string ConfirmPassword { get; set; }
 
         // User Profile fields
-        [Required]
         [DataType(DataType.ImageUrl)]
-        public string ProfilePictureUrl { get; set; } // URL of the profile picture
-        public string Website { get; set; }        // User's personal website or blog
+        public string ProfilePictureUrl { get; set; } = string.Empty; // URL of the profile picture
+        public string Website { get; set; } = string.Empty;       // User's personal website or blog
         [Required]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }  // Optional date of birth

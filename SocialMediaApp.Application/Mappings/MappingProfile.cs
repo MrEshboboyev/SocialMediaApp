@@ -35,6 +35,12 @@ namespace SocialMediaApp.Application.Mappings
             // CommentUpdateDTO -> Comment
             CreateMap<CommentUpdateDTO, Comment>();
             #endregion
+
+            #region Like
+
+            // Like -> LikeDTO (Reverse)
+            CreateMap<Like, LikeDTO>().ReverseMap();
+            #endregion
         }
     }
 }

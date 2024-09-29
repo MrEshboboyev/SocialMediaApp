@@ -35,35 +35,46 @@
 
 @section Scripts {
     <script>
+        // Function to load the edit form when "Edit" is clicked
         function loadEditForm(commentId) {
-            $.get('@Url.Action("Update", "Comment")', { commentId: commentId }, function(data) {
-                $('#editCommentForm-' + commentId).html(data).show();
+            // Hide the regular comment content
+            $('#comment-content-' + commentId).hide();
+            // Show the edit form for the comment
+            $('#edit-comment-form-' + commentId).show();
+        }
+
+        // Function to cancel editing and revert back to the original comment view
+        function cancelEdit(commentId) {
+            // Hide the edit form
+            $('#edit-comment-form-' + commentId).hide();
+            // Show the regular comment content again
+            $('#comment-content-' + commentId).show();
+        }
+
+        // Function to handle the comment edit form submission
+        function submitEditForm(commentId) {
+            var formData = $('#editForm-' + commentId).serialize(); // Serialize the form data
+
+            $.post('@Url.Action("Update", "Comment")', formData, function(response) {
+                if (response.success) {
+                    location.reload();  // Reload the page to reflect the updated comment, or you can dynamically update the comment content
+                } else {
+                    alert('Error updating comment.');
+                }
             });
         }
 
+        // Function to confirm delete
         function confirmDelete(commentId) {
             if (confirm('Are you sure you want to delete this comment?')) {
                 $.post('@Url.Action("Delete", "Comment")', { commentId: commentId }, function(response) {
                     if (response.success) {
-                        $('#comment-' + commentId).remove();  // Remove the deleted comment from the DOM
+                        $('#comment-block-' + commentId).remove();  // Remove the deleted comment from the DOM
                     } else {
                         alert('Error deleting comment.');
                     }
                 });
             }
         }
-
-        $(document).on('submit', '#editCommentForm', function(event) {
-            event.preventDefault();  // Prevent the form from submitting the traditional way
-            var formData = $(this).serialize();
-
-            $.post('@Url.Action("Update", "Comment")', formData, function(response) {
-                if (response.success) {
-                    location.reload();  // Reload the page or dynamically update the comment
-                } else {
-                    alert('Error updating comment.');
-                }
-            });
-        });
     </script>
 }

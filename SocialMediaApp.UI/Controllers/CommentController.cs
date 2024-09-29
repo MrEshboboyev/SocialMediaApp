@@ -30,44 +30,31 @@ namespace SocialMediaApp.UI.Controllers
             if (result.Success)
             {
                 TempData["success"] = "Comment successfully created!";
-                return RedirectToAction("Details", "Post", new {commentDTO.PostId});
+                return RedirectToAction("Details", "Post", new { commentDTO.PostId });
             }
 
             TempData["error"] = $"Failed to create comment process. Error : {result.Message}";
             return RedirectToAction("Details", "Post", new { commentDTO.PostId });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Update(int commentId)
-        {
-            var comment = (await _commentService.GetCommentAsync(commentId)).Data;
-            if (comment == null || comment.UserId != _userManager.GetUserId(User))
-            {
-                return Unauthorized();
-            }
-            return PartialView("_EditCommentPartial", comment);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Update(CommentDTO commentDTO)
         {
-            if (ModelState.IsValid && commentDTO.UserId == _userManager.GetUserId(User))
+            CommentUpdateDTO commentUpdateDTO = new()
             {
-                CommentUpdateDTO commentUpdateDTO = new ()
-                {
-                    UserId = GetUserId(),
-                    Content = commentDTO.Content,
-                    Id = commentDTO.Id,
-                    OwnerName = commentDTO.OwnerName,
-                    PostId = commentDTO.PostId
-                };
+                UserId = GetUserId(),
+                Content = commentDTO.Content,
+                Id = commentDTO.Id,
+                OwnerName = commentDTO.OwnerName,
+                PostId = commentDTO.PostId
+            };
 
-                var result = await _commentService.UpdateCommentAsync(commentUpdateDTO);
-                if (result.Success)
-                {
-                    return Json(new { success = true });
-                }
+            var result = await _commentService.UpdateCommentAsync(commentUpdateDTO);
+            if (result.Success)
+            {
+                return Json(new { success = true });
             }
+
             return Json(new { success = false });
         }
 

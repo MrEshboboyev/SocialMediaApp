@@ -18,6 +18,6 @@ namespace SocialMediaApp.Application.DTOs
         public int PostId { get; set; }            
 
         // Navigation Properties
-        public string OwnerName { get; set; }             
+        public string? OwnerName { get; set; }             
     }
 }

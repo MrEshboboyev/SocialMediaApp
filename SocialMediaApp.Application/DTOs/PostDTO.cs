@@ -14,6 +14,8 @@ namespace SocialMediaApp.Application.DTOs
         public DateTime CreatedAt { get; set; }    
 
         public string? UserId { get; set; }           
-        public string? OwnerName { get; set; }    
+        public string? OwnerName { get; set; }
+
+        public List<LikeDTO> Likes { get; set; }
     }
 }

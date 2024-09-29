@@ -19,7 +19,7 @@ namespace SocialMediaApp.Infrastructure.Implementations
             try
             {
                 var allPosts = await _unitOfWork.Post.GetAllAsync(
-                    includeProperties: "User");
+                    includeProperties: "User,Likes");
 
                 var mappedPosts = _mapper.Map<IEnumerable<PostDTO>>(allPosts);
 
@@ -37,7 +37,7 @@ namespace SocialMediaApp.Infrastructure.Implementations
             {
                 var allPosts = await _unitOfWork.Post.GetAllAsync(
                     filter: p => p.UserId.Equals(userId),
-                    includeProperties: "User");
+                    includeProperties: "User,Likes");
 
                 var mappedPosts = _mapper.Map<IEnumerable<PostDTO>>(allPosts);
 
@@ -55,7 +55,7 @@ namespace SocialMediaApp.Infrastructure.Implementations
             {
                 var post = await _unitOfWork.Post.GetAsync(
                     filter: p => p.Id.Equals(postId),
-                    includeProperties: "User");
+                    includeProperties: "User,Likes");
 
                 var mappedPost = _mapper.Map<PostDTO>(post);
 

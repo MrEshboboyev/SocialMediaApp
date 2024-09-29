@@ -3,12 +3,23 @@
 <div class="container mt-5">
     <!-- Post Details -->
     <div class="card shadow-sm mb-4">
-        <div class="card-header bg-info text-white">
+        <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
             <h4>@Model.Post.OwnerName</h4>
             <small class="text-muted">@Model.Post.CreatedAt.ToString("MMMM dd, yyyy hh:mm tt")</small>
         </div>
         <div class="card-body">
             <p>@Model.Post.Content</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+            <!-- Like Button and Like Count -->
+            <div>
+                <a asp-action="Like" asp-route-postId="@Model.Post.Id" class="btn btn-outline-success btn-sm">
+                    <i class="bi bi-hand-thumbs-up"></i> Like
+                </a>
+                <span class="badge bg-success ms-2" style="font-size: 1rem;">
+                    <i class="bi bi-hand-thumbs-up-fill"></i> @Model.Post.Likes.Count
+                </span>
+            </div>
         </div>
     </div>
 
@@ -27,7 +38,7 @@
         </div>
     </div>
 
-    <!-- Add a Comment Section (Include the _CreateCommentPartial here) -->
+    <!-- Add a Comment Section -->
     <div class="mt-4">
         @Html.Partial("_CreateCommentPartial", new CommentDTO { PostId = Model.Post.Id })
     </div>

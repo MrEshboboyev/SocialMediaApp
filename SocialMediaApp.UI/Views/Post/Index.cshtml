@@ -14,23 +14,39 @@
             {
                 <div class="col-md-6 mb-4">
                     <div class="card shadow-sm">
-                        <div class="card-header bg-primary text-white d-flex justify-content-between">
+                        <!-- Card Header: Owner Name and Created At -->
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                             <span><strong>@post.OwnerName</strong></span>
                             <span class="small">@post.CreatedAt.ToString("MMMM dd, yyyy hh:mm tt")</span>
                         </div>
+
+                        <!-- Card Body: Post Content -->
                         <div class="card-body">
                             <p class="card-text">@post.Content</p>
                         </div>
-                        <div class="card-footer text-muted">
-                            <a asp-action="Details" asp-route-postId="@post.Id" class="btn btn-outline-primary btn-sm">
-                                View Details
-                            </a>
-                            <a asp-action="Like" asp-route-postId="@post.Id" class="btn btn-outline-success btn-sm ml-2">
-                                Like <i class="bi bi-hand-thumbs-up"></i>
-                            </a>
-                            <a asp-action="Details" asp-route-postId="@post.Id" class="btn btn-outline-secondary btn-sm ml-2">
-                                Comment <i class="bi bi-chat-dots"></i>
-                            </a>
+
+                        <!-- Card Footer: Actions and Like Count -->
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <div>
+                                <a asp-action="Details" asp-route-postId="@post.Id" class="btn btn-outline-primary btn-sm">
+                                    View Details
+                                </a>
+                                <a asp-action="Details" asp-route-postId="@post.Id" class="btn btn-outline-secondary btn-sm ml-2">
+                                    Comment <i class="bi bi-chat-dots"></i>
+                                </a>
+                            </div>
+
+                            <div>
+                                <!-- Like Button with Like Count -->
+                                <a asp-action="Like" asp-route-postId="@post.Id" class="btn btn-outline-success btn-sm">
+                                    <i class="bi bi-hand-thumbs-up"></i> Like
+                                </a>
+
+                                <!-- Like Counter Badge -->
+                                <span class="badge bg-success ms-2" style="font-size: 1rem;">
+                                    <i class="bi bi-hand-thumbs-up-fill"></i> @post.Likes.Count
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,9 +61,8 @@
     </div>
 </div>
 
-<!-- Optional: Add pagination controls if needed -->
+<!-- Optional: Pagination Controls (Placeholder for now) -->
 <div class="d-flex justify-content-center mt-4">
-    <!-- Example Pagination Placeholder -->
     <nav>
         <ul class="pagination">
             <li class="page-item disabled">

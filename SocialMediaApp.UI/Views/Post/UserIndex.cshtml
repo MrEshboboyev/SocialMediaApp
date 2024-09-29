@@ -14,23 +14,41 @@
             {
                 <div class="col-md-6 mb-4">
                     <div class="card shadow-sm">
+                        <!-- Card Header: Owner Name and Created At -->
                         <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
                             <span><strong>@post.OwnerName</strong></span>
                             <span class="small">@post.CreatedAt.ToString("MMMM dd, yyyy hh:mm tt")</span>
                         </div>
+
+                        <!-- Card Body: Post Content -->
                         <div class="card-body">
                             <p class="card-text">@post.Content</p>
                         </div>
-                        <div class="card-footer text-muted d-flex justify-content-between">
-                            <a asp-action="Update" asp-route-postId="@post.Id" class="btn btn-outline-warning btn-sm">
-                                <i class="bi bi-pencil-square"></i> Edit
-                            </a>
-                            <form asp-action="Delete" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this post?');">
-                                <input type="hidden" name="postId" value="@post.Id" />
-                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-trash"></i> Delete
-                                </button>
-                            </form>
+
+                        <!-- Card Footer: Edit, Delete, and Like -->
+                        <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                            <!-- Edit and Delete Buttons -->
+                            <div>
+                                <a asp-action="Update" asp-route-postId="@post.Id" class="btn btn-outline-warning btn-sm">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <form asp-action="Delete" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                    <input type="hidden" name="postId" value="@post.Id" />
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Like Button and Like Count Badge -->
+                            <div>
+                                <a asp-action="Like" asp-route-postId="@post.Id" class="btn btn-outline-success btn-sm">
+                                    <i class="bi bi-hand-thumbs-up"></i> Like
+                                </a>
+                                <span class="badge bg-success ms-2" style="font-size: 1rem;">
+                                    <i class="bi bi-hand-thumbs-up-fill"></i> @post.Likes.Count
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>

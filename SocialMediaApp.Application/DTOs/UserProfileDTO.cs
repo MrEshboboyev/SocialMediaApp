@@ -19,6 +19,6 @@ namespace SocialMediaApp.Application.DTOs
         public string UserId { get; set; }            // Foreign key to User
 
         // Add this for handling image uploads
-        public IFormFile ProfilePicture { get; set; }
+        public IFormFile? ProfilePicture { get; set; }
     }
 }
